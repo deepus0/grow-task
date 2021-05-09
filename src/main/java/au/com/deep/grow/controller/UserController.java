@@ -1,10 +1,12 @@
 package au.com.deep.grow.controller;
 
 import au.com.deep.grow.model.xero.IdentityTokenResponse;
-import au.com.deep.grow.model.xero.XeroResponse;
+import au.com.deep.grow.model.RedirectResponse;
 import au.com.deep.grow.model.xero.XeroTenant;
-import au.com.deep.grow.service.UserService;
+import au.com.deep.grow.service.AuthService;
+import au.com.deep.grow.service.impl.XeroAuthService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,24 +19,25 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    private final UserService userService;
+    @Qualifier("xeroAuthService")
+    private final AuthService authService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(XeroAuthService authService) {
+        this.authService = authService;
     }
 
     @GetMapping("/xero/login/redirect")
-    public XeroResponse getXeroRedirectUrl() {
-        return userService.getXeroRedirectUrl();
+    public RedirectResponse getRedirectUrl() {
+        return authService.getRedirectUrl();
     }
 
     @GetMapping("/token/{code}")
     public IdentityTokenResponse getToken(@PathVariable("code") String code) {
-        return userService.getToken(code);
+        return authService.getToken(code);
     }
 
     @GetMapping("/tenants/{accessToken}")
     public List<XeroTenant> getTenants(@PathVariable("accessToken") String accessToken) {
-        return userService.getTenants(accessToken);
+        return authService.getTenants(accessToken);
     }
 }

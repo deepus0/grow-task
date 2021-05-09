@@ -1,4 +1,4 @@
-package au.com.deep.grow.config;
+package au.com.deep.grow.config.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.codec.Decoder;
@@ -18,7 +18,6 @@ public class FeignConfig {
 
     @Bean
     public Decoder decoder() {
-        return new ResponseEntityDecoder(
-                new JacksonDecoder(objectMapper));
+        return new ResponseEntityDecoder(new JacksonDecoder(objectMapper));
     }
 }

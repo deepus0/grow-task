@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './core/auth/page/login/login.component';
+import {LoginComponent} from './feature/login/page/login/login.component';
 import {RouteConstant} from './core/constant/route.constant';
 import {PostloginComponent} from './core/layout/postlogin/postlogin.component';
 import {PreloginComponent} from './core/layout/prelogin/prelogin.component';

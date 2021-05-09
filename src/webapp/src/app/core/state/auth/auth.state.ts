@@ -5,6 +5,8 @@ import {AuthStateModel} from './auth.state.model';
 import {TokenModel} from '../../models/token.model';
 import {AuthRestService} from '../../services/rest/auth.rest.service';
 import {UserRestService} from '../../services/rest/user.rest.service';
+import {decodeJwt} from '../../util/jwt.util';
+import {Invalidate} from './auth.action';
 
 const initialState: AuthStateModel = {
   code: null,
@@ -48,21 +50,29 @@ export class AuthState {
   @Action(AuthActions.Authenticate)
   authenticate(ctx: StateContext<AuthStateModel>, {payload}: AuthActions.Authenticate) {
     ctx.patchState({
-      isLoading: true
+      isLoading: true,
+      code: payload.code
     })
-    this.authService.retrieveToken(payload.code).subscribe(response => {
-      this.userService.getTenants(response.access_token).subscribe(res => {
-        ctx.patchState({
-          token: response,
-          tenantId: res[0].tenantId,
-          isLoading: false,
-        })
+    this.authService.retrieveToken(payload.code).subscribe(token => {
+      this.userService.getTenants(token.access_token).subscribe(tenants => {
+        const event_id = decodeJwt(token.access_token).authentication_event_id;
+        const validTenant = tenants.find(tenant => tenant.authEventId === event_id);
+        if (validTenant) {
+          ctx.patchState({
+            token: token,
+            tenantId: validTenant.tenantId,
+            isLoading: false,
+          });
+        } else {
+          ctx.dispatch(new Invalidate());
+        }
+
       })
     });
+  }
 
-    ctx.patchState({
-      code: payload.code
-    });
-
+  @Action(AuthActions.Invalidate)
+  invalidate(ctx: StateContext<AuthStateModel>, action: AuthActions.Authenticate) {
+    ctx.setState(initialState);
   }
 }

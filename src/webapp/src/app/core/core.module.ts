@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {LoginComponent} from './auth/page/login/login.component';
+import {LoginComponent} from '../feature/login/page/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {PreloginComponent} from './layout/prelogin/prelogin.component';
 import {PostloginComponent} from './layout/postlogin/postlogin.component';

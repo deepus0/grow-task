@@ -1,6 +1,6 @@
 package au.com.deep.grow.client;
 
-import au.com.deep.grow.config.XeroIdentityClientConfig;
+import au.com.deep.grow.config.feign.XeroIdentityClientConfig;
 import au.com.deep.grow.model.xero.IdentityTokenRequest;
 import au.com.deep.grow.model.xero.IdentityTokenResponse;
 import org.springframework.cloud.openfeign.FeignClient;

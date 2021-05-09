@@ -1,4 +1,4 @@
-package au.com.deep.grow.config;
+package au.com.deep.grow.config.feign;
 
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
@@ -10,12 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class XeroIdentityClientConfig {
-
-    private final ObjectFactory<HttpMessageConverters> messageConverters;
-
-    public XeroIdentityClientConfig(ObjectFactory<HttpMessageConverters> messageConverters) {
-        this.messageConverters = messageConverters;
-    }
 
     @Bean
     Encoder feignFormEncoder(ObjectFactory<HttpMessageConverters> converters) {

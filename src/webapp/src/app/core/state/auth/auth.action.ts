@@ -9,3 +9,7 @@ export class Authenticate {
   constructor(public payload: any) {
   }
 }
+
+export class Invalidate {
+  static readonly type = '[Auth] Invalidate';
+}

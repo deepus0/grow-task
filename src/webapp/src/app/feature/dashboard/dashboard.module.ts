@@ -9,7 +9,8 @@ import {TotalSummaryComponent} from './components/total-summary/total-summary.co
 @NgModule({
   declarations: [
     LandingComponent,
-    TotalSummaryComponent],
+    TotalSummaryComponent
+  ],
   imports: [
     SharedModule,
     DashboardRoutingModule

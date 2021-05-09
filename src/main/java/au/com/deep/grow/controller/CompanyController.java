@@ -2,7 +2,7 @@ package au.com.deep.grow.controller;
 
 import au.com.deep.grow.model.ui.Contact;
 import au.com.deep.grow.model.ui.Employee;
-import au.com.deep.grow.service.CompanyService;
+import au.com.deep.grow.service.impl.XeroCompanyService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,19 +14,19 @@ import java.util.List;
 @RequestMapping("/api/company")
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private final XeroCompanyService xeroCompanyService;
 
-    public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
+    public CompanyController(XeroCompanyService xeroCompanyService) {
+        this.xeroCompanyService = xeroCompanyService;
     }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployees(HttpServletRequest request) {
-        return companyService.getEmployees(request);
+    public List<Employee> getEmployees() {
+        return xeroCompanyService.getEmployees();
     }
 
     @GetMapping("/contacts")
-    public List<Contact> getContacts(HttpServletRequest request) {
-        return companyService.getContacts(request);
+    public List<Contact> getContacts() {
+        return xeroCompanyService.getContacts();
     }
 }

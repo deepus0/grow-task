@@ -24,18 +24,9 @@ const EXPORT_MODULES = [
 const EXPORT_MATERIAL_MODULES = [
   MatToolbarModule,
   MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
   MatButtonModule,
   MatIconModule,
-  MatRadioModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatSelectModule,
   MatProgressSpinnerModule,
-  MatSelectModule,
-  MatSnackBarModule,
-  MatToolbarModule,
   MatExpansionModule,
 ];
 

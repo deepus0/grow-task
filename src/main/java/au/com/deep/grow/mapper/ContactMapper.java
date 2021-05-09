@@ -25,7 +25,7 @@ public class ContactMapper {
         contact.setTotalAmount(0);
         LocalDate lastYear = LocalDate.now().minus(1, ChronoUnit.YEARS);
         for (Invoice invoice : invoices.getInvoices()) {
-            if (invoice.getDateAsDate().isAfter(lastYear)) {
+            if (invoice.getContact().getContactID().toString().equals(contact.getContactId()) && invoice.getDateAsDate().isAfter(lastYear)) {
                 contact.setTotalAmount(contact.getTotalAmount() + invoice.getTotal());
             }
         }
