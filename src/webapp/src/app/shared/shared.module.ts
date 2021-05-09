@@ -12,6 +12,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 const EXPORT_MODULES = [
@@ -33,6 +34,7 @@ const EXPORT_MATERIAL_MODULES = [
   MatSelectModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatExpansionModule,
 ];
 
 const EXPORT_DECLARATIONS = [

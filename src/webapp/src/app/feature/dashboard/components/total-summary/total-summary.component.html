@@ -1,10 +1,50 @@
-
 <mat-card>
   <mat-card-title>Total Summary</mat-card-title>
   <mat-card-content>
-    <h2>Total Number of Employees:  {{numberOfEmployees}}</h2>
-    <h2>Average Annual Summary: </h2>
-    Average Annual Summary\
+    <ng-container *ngIf="numberOfEmployees">
+      <h2>Total Number of Employees:  {{numberOfEmployees}}  </h2>
+      <h2>Average Annual Summary: {{averageAnnualSummary | currency}} </h2>
+    </ng-container>
+    <mat-spinner *ngIf="!numberOfEmployees"></mat-spinner>
+    <ng-container>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Customers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table *ngIf="customers">
+          <tr>
+            <th>Customer</th>
+            <th>Amount</th>
+          </tr>
+          <tr *ngFor="let customer of customers">
+            <td>{{customer.name}}</td>
+            <td>{{customer.totalAmount | currency}}</td>
+          </tr>
+        </table>
+        <mat-spinner *ngIf="!customers"></mat-spinner>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Suppliers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table *ngIf="suppliers">
+          <tr>
+            <th>Supplier</th>
+            <th>Amount</th>
+          </tr>
+          <tr *ngFor="let supplier of suppliers">
+            <td>{{supplier.name}}</td>
+            <td>{{supplier.totalAmount | currency}}</td>
+          </tr>
+        </table>
+        <mat-spinner *ngIf="!suppliers"></mat-spinner>
+      </mat-expansion-panel>
+    </ng-container>
+    <button mat-raised-button color="primary" [disabled]="!canDownloadData()" (click)="downloadData()">Download Report</button>
   </mat-card-content>
 </mat-card>
 

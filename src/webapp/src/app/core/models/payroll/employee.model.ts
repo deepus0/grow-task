@@ -1,3 +1,5 @@
 export interface EmployeeModel {
-  FirstName: string;
+  firstName: string;
+  lastName: string;
+  salary: number;
 }

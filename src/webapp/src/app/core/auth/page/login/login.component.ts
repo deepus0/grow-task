@@ -8,7 +8,7 @@ import {DOCUMENT} from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  readonly test = 'https://login.xero.com/identity/connect/authorize?response_type=code&client_id=E765504CC2AB4969A3B9FCF5E847DA70&redirect_uri=http://localhost:4200/callback&scope=openid profile email accounting.transactions payroll.employees&state=123';
+  readonly test = 'https://login.xero.com/identity/connect/authorize?response_type=code&client_id=E765504CC2AB4969A3B9FCF5E847DA70&redirect_uri=http://localhost:4200/callback&scope=openid profile email accounting.contacts payroll.employees accounting.transactions&state=123';
   isLoading: boolean;
 
   constructor(@Inject(DOCUMENT) private document: Document) {

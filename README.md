@@ -1,11 +1,42 @@
-# grow-task
+# Grow-Xero [Grow]
+Grow Xero programming task
+## Overview
+Sample view of Login
+![alt text](docs/Screenshot 2021-05-09 185818.png)
+Sample View of Dashboard
+![alt text](docs/Screenshot 2021-05-09 185523.png)
 
-## Running Locally
-Run `./gradlew build`
 
-Change the Spring boot active profiles to be running on local
+## Development Guidelines
+### Local Development
+#### Application
+Grow-Xero consists of two modules webapp (Angular front-end) and a backend Spring boot application
 
-Start up the Spring boot application, it will be default be running on localhost 8080
+Location of modules
+- grow-xero-frontend, src/webapp
+- grow-xero-backend, src/main/java/au/com/deep/grow
 
-Run `npm install` in src/webapp 
-Run `npm start` in src/webapp to start the angular application on localhost 4200
+The following respective default ports are;
+- grow-xero-backend - **:8080**
+
+
+## Project
+### Building Project
+Building the whole module using the gradle command;
+`./gradlew clean build`
+
+#### Dealer-UI
+To install node modules, navigate to package.json directory level and execute
+`npm install`
+
+To start the frontend application
+`ng serve`
+`npm start`
+
+
+### TODO
+- Download file capability - CSV
+- (Minor) Refresh Tokens
+- (Minor) Aesthetics
+- (Minor) Permissions
+- (Minor) Backend Security / Validation

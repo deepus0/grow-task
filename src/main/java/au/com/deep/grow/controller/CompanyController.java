@@ -1,7 +1,8 @@
 package au.com.deep.grow.controller;
 
+import au.com.deep.grow.model.ui.Contact;
+import au.com.deep.grow.model.ui.Employee;
 import au.com.deep.grow.service.CompanyService;
-import com.xero.models.payrollau.Employee;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +23,10 @@ public class CompanyController {
     @GetMapping("/employees")
     public List<Employee> getEmployees(HttpServletRequest request) {
         return companyService.getEmployees(request);
+    }
+
+    @GetMapping("/contacts")
+    public List<Contact> getContacts(HttpServletRequest request) {
+        return companyService.getContacts(request);
     }
 }
