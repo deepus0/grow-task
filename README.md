@@ -35,6 +35,7 @@ To start the frontend application
 
 
 ### TODO
+- Unit tests
 - (Minor) Refresh Tokens
 - (Minor) Aesthetics
 - (Minor) Permissions
