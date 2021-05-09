@@ -38,12 +38,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.4'
 }
 
-node {
+/*node {
     version = "12.11.1"
     npmVersion = '6.9.0'
     download = true
     nodeModulesDir = file("${projectDir}/src/webapp")
-}
+}*/
 
 def webappDir = "$projectDir/src/webapp"
 
@@ -55,7 +55,7 @@ sourceSets {
     }
 }
 
-processResources {
+/*processResources {
     dependsOn "packageNpmApp"
 }
 
@@ -67,5 +67,5 @@ task packageNpmApp(type: NpmTask, dependsOn: 'npmInstall') {
     } else {
         args = ['run', 'buildDev']
     }
-}
+}*/
 

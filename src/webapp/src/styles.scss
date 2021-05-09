@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.transparent-snackbar {
+  background: rgba(0, 0, 0, 0.0)
+}
+
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+  //For dropdown to appear in front of stack
+  z-index: 10000 !important;
+}

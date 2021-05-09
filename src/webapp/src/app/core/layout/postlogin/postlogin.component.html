@@ -1,0 +1,9 @@
+<app-header>
+  <span *ngFor="let navRoute of POST_LOGIN_NAV" class="p-2 my-auto h5 pointer pink-text" (click)="navigate(navRoute.route)">{{navRoute.label}}</span>
+  <button mat-raised-button color="accent" (click)="logout()">Log Out</button>
+</app-header>
+<div class="layout">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+l
