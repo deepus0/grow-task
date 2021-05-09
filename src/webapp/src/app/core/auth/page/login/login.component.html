@@ -1,9 +1,9 @@
 <mat-card>
-  <mat-card-title>
-    Login
-  </mat-card-title>
   <mat-card-content>
-    <button mat-raised-button color="accent" [disabled]="isLoading" (click)="directToXero()">Redirect to Xero Login...</button>
+    <div fxLayout="column" fxLayoutAlign="space-between center" class="login-container">
+      <h3 class="login-text">Login via Xero</h3>
+      <button mat-raised-button color="primary" [disabled]="isLoading" (click)="directToXero()" class="login-button"><span>Redirect to Xero Login...</span></button>
+    </div>
   </mat-card-content>
 </mat-card>
 

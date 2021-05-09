@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyRestService} from '../../../../core/services/rest/company.rest.service';
 import {ContactModel} from '../../../../core/models/contact.model';
-import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-total-summary',
@@ -11,12 +10,6 @@ import {Observable, of} from 'rxjs';
 export class TotalSummaryComponent implements OnInit {
 
   constructor(private companyService: CompanyRestService) {
-  }
-
-  private setting = {
-    element: {
-      dynamicDownload: null as HTMLElement
-    }
   }
 
   numberOfEmployees: number;
@@ -39,7 +32,6 @@ export class TotalSummaryComponent implements OnInit {
       }
     });
     this.companyService.getContacts().subscribe(res => {
-      console.log(res);
       this.customers = [];
       this.suppliers = [];
       for (let contact of res) {
@@ -57,36 +49,39 @@ export class TotalSummaryComponent implements OnInit {
   }
 
   downloadData(): void {
-    this.createData().subscribe((res) => {
-      this.dynamicDownloadByHtmlTag({
-        fileName: 'Report Data',
-        text: JSON.stringify(res)
-      });
-    })
+    this.downloadFile(this.suppliers, 'suppliers.csv');
+    this.downloadFile(this.customers, 'customers.csv');
+    this.downloadSummary();
   }
 
-  private createData(): Observable<any> {
-    return of({
-      numberOfEmployees: this.numberOfEmployees,
-      averageAnnualSummary: this.averageAnnualSummary,
-      customers: this.customers,
-      suppliers: this.suppliers,
-    })
+  downloadFile(data: ContactModel[], fileName: string) {
+    const replacer = (key, value) => (value === null ? '' : value);
+    const header = Object.keys(data[0]);
+    const csv = data.map((row) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(',')
+    );
+    csv.unshift(header.join(','));
+    const csvArray = csv.join('\r\n');
+    this.downloadCsv(fileName, csvArray);
   }
 
-  private dynamicDownloadByHtmlTag(arg: {
-    fileName: string,
-    text: string
-  }) {
-    if (!this.setting.element.dynamicDownload) {
-      this.setting.element.dynamicDownload = document.createElement('a');
-    }
-    const element = this.setting.element.dynamicDownload;
-    const fileType = 'text/plain';
-    element.setAttribute('href', `data:${fileType};charset=utf-8,${encodeURIComponent(arg.text)}`);
-    element.setAttribute('download', arg.fileName);
+  downloadSummary() {
+    const csv = ['numberOfEmployees,averageAnnualSummary', this.numberOfEmployees + ',' + this.averageAnnualSummary]
+    const csvArray = csv.join('\r\n');
+    this.downloadCsv('summary.csv', csvArray);
+  }
 
-    let event = new MouseEvent("click");
-    element.dispatchEvent(event);
+  downloadCsv(fileName: string, csvArray: any) {
+    const a = document.createElement('a');
+    const blob = new Blob([csvArray], {type: 'text/csv'});
+    const url = window.URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
   }
 }

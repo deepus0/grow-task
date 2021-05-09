@@ -35,7 +35,6 @@ To start the frontend application
 
 
 ### TODO
-- Download file capability - CSV
 - (Minor) Refresh Tokens
 - (Minor) Aesthetics
 - (Minor) Permissions

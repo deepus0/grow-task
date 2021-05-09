@@ -1,6 +1,7 @@
 export interface ContactModel {
-  customer: boolean;
-  supplier: boolean;
   name: string;
   totalAmount: number;
+  customer: boolean;
+  supplier: boolean;
+  contactId: string;
 }
