@@ -4,6 +4,7 @@ import au.com.deep.grow.config.feign.XeroApiRequestInterceptor;
 import com.xero.models.accounting.Contacts;
 import com.xero.models.accounting.Invoices;
 import com.xero.models.payrollau.Employees;
+import com.xero.models.payrollau.PayrollCalendars;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,4 +25,7 @@ public interface XeroApiClient {
 
     @GetMapping(value = "/api.xro/2.0/Invoices", consumes = "application/json", produces = "application/json")
     Invoices getInvoices(@RequestParam("ContactIDs") String contactIds);
+
+    @GetMapping(value = "payroll.xro/1.0/PayrollCalendars", consumes = "application/json", produces = "application/json")
+    PayrollCalendars getPayrollCalendars();
 }

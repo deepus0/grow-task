@@ -1,11 +1,15 @@
 <mat-card>
   <mat-card-title>Total Summary</mat-card-title>
   <mat-card-content>
-    <ng-container *ngIf="numberOfEmployees">
-      <h2>Total Number of Employees:  {{numberOfEmployees}}  </h2>
-      <h2>Average Annual Summary: {{averageAnnualSummary | currency}} </h2>
+    <ng-container *ngIf="!employeesLoading">
+      <mat-card>
+        <h2>Total Number of Employees:  {{numberOfEmployees}}  </h2>
+      </mat-card>
+      <mat-card>
+        <h2>Average Annual Summary: {{averageAnnualSummary | currency}} </h2>
+      </mat-card>
     </ng-container>
-    <mat-spinner *ngIf="!numberOfEmployees"></mat-spinner>
+    <mat-spinner *ngIf="employeesLoading"></mat-spinner>
     <ng-container>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -13,7 +17,7 @@
             Customers
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <table *ngIf="customers">
+        <table *ngIf="!contactsLoading" class="contact-table">
           <tr>
             <th>Customer</th>
             <th>Amount</th>
@@ -23,7 +27,7 @@
             <td>{{customer.totalAmount | currency}}</td>
           </tr>
         </table>
-        <mat-spinner *ngIf="!customers"></mat-spinner>
+        <mat-spinner *ngIf="contactsLoading"></mat-spinner>
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -31,7 +35,7 @@
             Suppliers
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <table *ngIf="suppliers">
+        <table *ngIf="!contactsLoading" class="contact-table">
           <tr>
             <th>Supplier</th>
             <th>Amount</th>
@@ -41,10 +45,12 @@
             <td>{{supplier.totalAmount | currency}}</td>
           </tr>
         </table>
-        <mat-spinner *ngIf="!suppliers"></mat-spinner>
+        <mat-spinner *ngIf="contactsLoading"></mat-spinner>
       </mat-expansion-panel>
     </ng-container>
-    <button mat-raised-button color="primary" [disabled]="!canDownloadData()" (click)="downloadData()">Download Report CSV's</button>
+    <button mat-raised-button color="primary" [disabled]="!canDownloadData()" (click)="downloadData()">Download Report
+      CSV's
+    </button>
   </mat-card-content>
 </mat-card>
 

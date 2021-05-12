@@ -39,9 +39,10 @@ public class XeroAuthService implements AuthService {
         scopeList.add("openid");
         scopeList.add("profile");
         scopeList.add("email");
-        scopeList.add("accounting.contacts");
-        scopeList.add("payroll.employees");
-        scopeList.add("accounting.transactions");
+        scopeList.add("accounting.contacts.read");
+        scopeList.add("payroll.employees.read");
+        scopeList.add("payroll.settings.read");
+        scopeList.add("accounting.transactions.read");
 
         try {
             URIBuilder builder = new URIBuilder(xeroProperties.getLoginUrl());

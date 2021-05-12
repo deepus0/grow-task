@@ -12,28 +12,33 @@ export class TotalSummaryComponent implements OnInit {
   constructor(private companyService: CompanyRestService) {
   }
 
-  numberOfEmployees: number;
-  averageAnnualSummary: number;
+  numberOfEmployees: number = 0;
+  averageAnnualSummary: number = 0;
+  customers: ContactModel[] = [];
+  suppliers: ContactModel[] = [];
 
-  customers: ContactModel[];
-  suppliers: ContactModel[];
+  employeesLoading = false;
+  contactsLoading = false;
 
   ngOnInit(): void {
     this.loadInitialData();
   }
 
   loadInitialData(): void {
-    this.averageAnnualSummary = 0;
+    this.employeesLoading = true;
     this.companyService.getEmployees().subscribe(res => {
-
       this.numberOfEmployees = res.length;
+      let totalSummary = 0;
+      let hasSalary = 0;
       for (let employee of res) {
-        this.averageAnnualSummary += employee.salary ?? 0;
+        totalSummary += employee.salary ?? 0;
+        hasSalary++;
       }
+      this.averageAnnualSummary = (totalSummary / hasSalary);
+      this.employeesLoading = false;
     });
+    this.contactsLoading = true;
     this.companyService.getContacts().subscribe(res => {
-      this.customers = [];
-      this.suppliers = [];
       for (let contact of res) {
         if (contact.customer) {
           this.customers.push(contact);
@@ -41,6 +46,7 @@ export class TotalSummaryComponent implements OnInit {
           this.suppliers.push(contact)
         }
       }
+      this.contactsLoading = false;
     });
   }
 

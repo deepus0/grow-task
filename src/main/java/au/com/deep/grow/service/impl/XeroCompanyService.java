@@ -7,6 +7,7 @@ import au.com.deep.grow.model.ui.Contact;
 import au.com.deep.grow.model.ui.Employee;
 import au.com.deep.grow.service.CompanyService;
 import com.xero.models.accounting.Invoices;
+import com.xero.models.payrollau.PayrollCalendar;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +31,12 @@ public class XeroCompanyService implements CompanyService {
 
     public List<Employee> getEmployees() {
         List<com.xero.models.payrollau.Employee> allEmployees = xeroApiClient.getEmployees().getEmployees();
+        List<PayrollCalendar> payrollCalendars = xeroApiClient.getPayrollCalendars().getPayrollCalendars();
         List<Employee> employees = new ArrayList<>();
         for (com.xero.models.payrollau.Employee employee : allEmployees) {
             try {
                 com.xero.models.payrollau.Employee temp = xeroApiClient.getEmployee(employee.getEmployeeID().toString()).getEmployees().get(0);
-                employees.add(employeeMapper.map(temp));
+                employees.add(employeeMapper.map(temp, payrollCalendars));
             } catch (Exception e) {
                 log.error("Failed to get employee information for employee {}", employee.getEmployeeID(), e);
             }
